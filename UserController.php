@@ -17,7 +17,7 @@ class UserController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Fetch and return all users data.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,18 +28,18 @@ class UserController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new user data.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return \response(['id' => $user->id, 'content' => 'ایجاد گردید'], 200);
+		return $user->store($request);
     }
 
     /**
-     * Display the specified resource.
+     * Fetch a specific user data.
      *
      * @param  \App\city  $city
      * @return \Illuminate\Http\Response
@@ -51,7 +51,7 @@ class UserController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * Update user data.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\city  $city
@@ -59,23 +59,23 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        return \response(['id' => $user->id, 'content' => 'ایجاد گردید'], 200);
+        return $user->update($request);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * delete user.
      *
      * @param  \App\city  $city
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-        return \response(['id' => $user->id, 'content' => 'ایجاد گردید'], 200);
+        return $user->delete($request);
     }
 
 
-        /**
-     * Return the places of a User
+    /**
+     * Return the complexes of a User
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -85,7 +85,7 @@ class UserController extends Controller
         return $request->user()->complexes()->paginate(10);
     }
 
-            /**
+    /**
      * Return the places of a User
      *
      * @param  \App\User  $user
@@ -95,8 +95,6 @@ class UserController extends Controller
     {   
         return $request->user()->places()->paginate(10);
     }
-
-
     
     /**
      * Return the likes of a User
@@ -119,8 +117,8 @@ class UserController extends Controller
         return $request->user()->comments()->paginate(10);
     }
 
-            /**
-     * Return the comments of a User
+    /**
+     * Return the transactions of a User
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -142,12 +140,12 @@ class UserController extends Controller
     }
 
     /**
-     * Return the notifications of a User
+     * Return the liked places of a User
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function likesPost(Request $request)
+    public function likedPlaces(Request $request)
     {   
         $user_id = $request->user()->id; 
         $complex_id = $request->complex_id; 
