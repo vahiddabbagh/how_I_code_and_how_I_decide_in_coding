@@ -1,0 +1,1 @@
+# how_I_code_and_how_I_decide_in_coding
